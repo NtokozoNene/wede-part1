@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Models - Advanced Automotive Lineup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Quantum Motors - Minimal Creative CSS */
+        :root {
+            --quantum-blue: #0066ff;
+            --neon-cyan: #00ffff;
+            --dark-space: #0a0a12;
+            --light-space: #1a1a2a;
+            --pure-white: #ffffff;
+            --glow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--dark-space);
+            color: var(--pure-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Quantum Splash Screen */
+        .quantum-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-space);
+            display: grid;
+            place-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease-out;
+        }
+
+        .quantum-loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid var(--neon-cyan);
+            border-radius: 50%;
+            animation: quantum-spin 1.5s linear infinite;
+        }
+
+        @keyframes quantum-spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .quantum-logo {
+            position: absolute;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: quantum-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes quantum-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* Navigation */
+        .quantum-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 18, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .quantum-main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .quantum-hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(10, 10, 18, 0.9), rgba(26, 26, 42, 0.8)),
+                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neon-cyan));
+            color: var(--pure-white);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+
+        /* Models Filter */
+        .models-filter {
+            padding: 2rem 0;
+            background: var(--light-space);
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--pure-white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neon-cyan));
+            border-color: transparent;
+        }
+
+        /* Car Showcase */
+        .car-showcase {
+            padding: 4rem 0;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .car-card {
+            background: var(--light-space);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .car-card:hover .car-image {
+            transform: scale(1.05);
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--neon-cyan);
+            color: var(--dark-space);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .car-info {
+            padding: 1.5rem;
+        }
+
+        .car-specs {
+            color: var(--neon-cyan);
+            font-weight: 500;
+            margin: 0.5rem 0;
+        }
+
+        .car-features {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature i {
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 0.3rem;
+        }
+
+        .feature span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 4rem 0;
+            background: var(--light-space);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--neon-cyan);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .quantum-footer {
+            background: var(--dark-space);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .car-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+        .opacity-90 { opacity: 0.9; }
+
+        /* Model Detail Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: var(--light-space);
+            max-width: 900px;
+            margin: 2rem auto;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modal-car-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .modal-car-info {
+            padding: 2rem;
+        }
+
+        .modal-car-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .spec-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Quantum Splash Screen -->
+    <div id="quantum-splash" class="quantum-splash">
+        <div class="quantum-loader"></div>
+        <div class="quantum-logo">QUANTUM</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="quantum-nav">
+        <div class="nav-container">
+            <div class="logo">QUANTUM</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="models.html" class="active">Models</a></li>
+                <li><a href="technology.html">Technology</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="quantum-main">
+        <!-- Hero Section -->
+        <section class="quantum-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Quantum Model Lineup</h1>
+                    <p class="hero-subtitle">Discover our range of revolutionary vehicles designed for the future</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Models Filter -->
+        <section class="models-filter">
+            <div class="container">
+                <h2 class="text-center mb-2">Find Your Quantum</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Models</button>
+                    <button class="filter-btn" data-filter="performance">Performance</button>
+                    <button class="filter-btn" data-filter="luxury">Luxury</button>
+                    <button class="filter-btn" data-filter="suv">SUV</button>
+                    <button class="filter-btn" data-filter="future">Future Concepts</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Car Showcase -->
+        <section class="car-showcase">
+            <div class="container">
+                <h2 class="text-center mb-3">Advanced Automotive Portfolio</h2>
+                <div class="car-grid">
+                    <!-- E-Tron -->
+                    <div class="car-card" data-category="performance">
+                        <span class="car-badge">Flagship</span>
+                        <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Quantum E-Tron" class="car-image">
+                        <div class="car-info">
+                            <h3>Quantum E-Tron</h3>
+                            <p class="car-specs">1,200 HP • 2.3s 0-100 km/h • 800 km range</p>
+                            <p>The ultimate electric hypercar with quantum computing capabilities and unprecedented performance.</p>
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>1,200 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>400 km/h</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-road"></i>
+                                    <span>800 km</span>
+                                </div>
+                            </div>
+                            <button class="cta-button view-details" data-model="e-tron">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- S-Series -->
+                    <div class="car-card" data-category="luxury">
+                        <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Quantum S-Series" class="car-image">
+                        <div class="car-info">
+                            <h3>Quantum S-Series</h3>
+                            <p class="car-specs">800 HP • AI Autonomous • Solar Charging</p>
+                            <p>The autonomous luxury sedan that redefines intelligent transportation and sustainable mobility.</p>
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-microchip"></i>
+                                    <span>AI Driven</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-sun"></i>
+                                    <span>Solar Roof</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-chair"></i>
+                                    <span>Executive</span>
+                                </div>
+                            </div>
+                            <button class="cta-button view-details" data-model="s-series">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quantum X -->
+                    <div class="car-card" data-category="suv">
+                        <span class="car-badge">New</span>
+                        <img src="https://article.images.consumerreports.org/image/upload/w_652,f_auto,q_auto,ar_16:9,c_lfill/v1748611589/prod/content/dam/CRO-Images-2025/Cars/CR-Cars-InlineHero-2025-Hyundai-Tucson-PHEV-r-static-5-25" 
+                             alt="Quantum X" class="car-image">
+                        <div class="car-info">
+                            <h3>Quantum X</h3>
+                            <p class="car-specs">1,000 HP • 7 Seats • Off-Road Capable</p>
+                            <p>The ultimate luxury electric SUV with unparalleled space, capability, and cutting-edge technology.</p>
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-snowflake"></i>
+                                    <span>All-Weather</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-users"></i>
+                                    <span>7 Seats</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Off-Road</span>
+                                </div>
+                            </div>
+                            <button class="cta-button view-details" data-model="quantum-x">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quantum GT -->
+                    <div class="car-card" data-category="performance">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Quantum GT" class="car-image">
+                        <div class="car-info">
+                            <h3>Quantum GT</h3>
+                            <p class="car-specs">950 HP • Grand Tourer • 700 km range</p>
+                            <p>The grand tourer that combines breathtaking performance with exceptional comfort for long journeys.</p>
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-wind"></i>
+                                    <span>Aerodynamic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-couch"></i>
+                                    <span>Luxury</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-road"></i>
+                                    <span>700 km</span>
+                                </div>
+                            </div>
+                            <button class="cta-button view-details" data-model="quantum-gt">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quantum Vision -->
+                    <div class="car-card" data-category="future">
+                        <span class="car-badge">Concept</span>
+                        <img src="https://www.thesun.co.uk/wp-content/uploads/2025/06/100-metres-quieter-lawnmower-making-1000145750.jpg?w=940" 
+                             alt="Quantum Vision" class="car-image">
+                        <div class="car-info">
+                            <h3>Quantum Vision</h3>
+                            <p class="car-specs">Flying Car • AI Pilot • Vertical Takeoff</p>
+                            <p>Our vision for the future of urban mobility - a fully autonomous electric vertical takeoff and landing vehicle.</p>
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-plane"></i>
+                                    <span>eVTOL</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-robot"></i>
+                                    <span>AI Pilot</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-city"></i>
+                                    <span>Urban</span>
+                                </div>
+                            </div>
+                            <button class="cta-button view-details" data-model="quantum-vision">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quantum Sport -->
+                    <div class="car-card" data-category="performance">
+                        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Quantum Sport" class="car-image">
+                        <div class="car-info">
+                            <h3>Quantum Sport</h3>
+                            <p class="car-specs">650 HP • Track Focused • Lightweight</p>
+                            <p>The pure sports car experience with track-focused performance and minimalist design for maximum driving engagement.</p>
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-weight"></i>
+                                    <span>Lightweight</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>320 km/h</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-track"></i>
+                                    <span>Track Ready</span>
+                                </div>
+                            </div>
+                            <button class="cta-button view-details" data-model="quantum-sport">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <div class="container">
+                <h2 class="text-center mb-3">Model Comparison</h2>
+                <div style="overflow-x: auto;">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Specification</th>
+                                <th>E-Tron</th>
+                                <th>S-Series</th>
+                                <th>Quantum X</th>
+                                <th>Quantum GT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Power (HP)</td>
+                                <td>1,200</td>
+                                <td>800</td>
+                                <td>1,000</td>
+                                <td>950</td>
+                            </tr>
+                            <tr>
+                                <td>0-100 km/h</td>
+                                <td>2.3s</td>
+                                <td>3.1s</td>
+                                <td>2.9s</td>
+                                <td>2.7s</td>
+                            </tr>
+                            <tr>
+                                <td>Range (km)</td>
+                                <td>800</td>
+                                <td>750</td>
+                                <td>700</td>
+                                <td>700</td>
+                            </tr>
+                            <tr>
+                                <td>Charging Time</td>
+                                <td>15 min (80%)</td>
+                                <td>18 min (80%)</td>
+                                <td>20 min (80%)</td>
+                                <td>16 min (80%)</td>
+                            </tr>
+                            <tr>
+                                <td>Autonomy Level</td>
+                                <td>Level 5 Ready</td>
+                                <td>Level 5</td>
+                                <td>Level 4</td>
+                                <td>Level 4</td>
+                            </tr>
+                            <tr>
+                                <td>Starting Price</td>
+                                <td>$250,000</td>
+                                <td>$180,000</td>
+                                <td>$220,000</td>
+                                <td>$210,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Model Detail Modal -->
+    <div id="model-modal" class="modal">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <img id="modal-image" class="modal-car-image" src="" alt="">
+            <div class="modal-car-info">
+                <h2 id="modal-title"></h2>
+                <p id="modal-subtitle" class="car-specs"></p>
+                <p id="modal-description"></p>
+                
+                <div class="modal-car-specs">
+                    <div class="spec-item">
+                        <div class="spec-value" id="spec-power">1,200 HP</div>
+                        <div class="spec-label">Power</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value" id="spec-acceleration">2.3s</div>
+                        <div class="spec-label">0-100 km/h</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value" id="spec-range">800 km</div>
+                        <div class="spec-label">Range</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value" id="spec-charging">15 min</div>
+                        <div class="spec-label">Fast Charge</div>
+                    </div>
+                </div>
+                
+                <h3>Key Features</h3>
+                <ul id="modal-features"></ul>
+                
+                <a href="contact.html" class="cta-button">Schedule a Test Drive</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="quantum-footer">
+        <div class="container">
+            <p>&copy; 2025 Quantum Motors. Pioneering the future of mobility.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Quantum Motors - Models Page JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle splash screen
+            setTimeout(() => {
+                const splash = document.getElementById('quantum-splash');
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 1000);
+            }, 2500);
+
+            // Model filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const carCards = document.querySelectorAll('.car-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Filter cards
+                    const filter = button.getAttribute('data-filter');
+                    
+                    carCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Model detail modals
+            const viewButtons = document.querySelectorAll('.view-details');
+            const modal = document.getElementById('model-modal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            // Model data
+            const models = {
+                'e-tron': {
+                    title: 'Quantum E-Tron',
+                    subtitle: '1,200 HP • 2.3s 0-100 km/h • 800 km range',
+                    description: 'The ultimate electric hypercar with quantum computing capabilities and unprecedented performance. The E-Tron represents the pinnacle of Quantum Motors engineering, featuring our most advanced technologies in a breathtaking package.',
+                    image: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    power: '1,200 HP',
+                    acceleration: '2.3s',
+                    range: '800 km',
+                    charging: '15 min',
+                    features: [
+                        'Quantum AI computing system',
+                        'Solid-state battery technology',
+                        'Active aerodynamics',
+                        'Carbon fiber monocoque',
+                        'Biometric access system',
+                        'Holographic driving interface'
+                    ]
+                },
+                's-series': {
+                    title: 'Quantum S-Series',
+                    subtitle: '800 HP • AI Autonomous • Solar Charging',
+                    description: 'The autonomous luxury sedan that redefines intelligent transportation and sustainable mobility. The S-Series offers unparalleled comfort and cutting-edge technology for the discerning driver.',
+                    image: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    power: '800 HP',
+                    acceleration: '3.1s',
+                    range: '750 km',
+                    charging: '18 min',
+                    features: [
+                        'Full Level 5 autonomy',
+                        'Integrated solar roof',
+                        'Executive lounge seating',
+                        'Advanced noise cancellation',
+                        'Air purification system',
+                        'Gesture control interface'
+                    ]
+                },
+                'quantum-x': {
+                    title: 'Quantum X',
+                    subtitle: '1,000 HP • 7 Seats • Off-Road Capable',
+                    description: 'The ultimate luxury electric SUV with unparalleled space, capability, and cutting-edge technology. The Quantum X is designed for those who demand performance without compromise, in any environment.',
+                    image: 'https://images.unsplash.com/photo-1549399542-7e82138d0dda?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    power: '1,000 HP',
+                    acceleration: '2.9s',
+                    range: '700 km',
+                    charging: '20 min',
+                    features: [
+                        'Quad-motor all-wheel drive',
+                        'Adaptive air suspension',
+                        'Off-road driving modes',
+                        'Seven-seat configuration',
+                        'Premium sound system',
+                        'Winter weather package'
+                    ]
+                }
+            };
+
+            // Open modal
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const model = button.getAttribute('data-model');
+                    if (models[model]) {
+                        const data = models[model];
+                        
+                        document.getElementById('modal-title').textContent = data.title;
+                        document.getElementById('modal-subtitle').textContent = data.subtitle;
+                        document.getElementById('modal-description').textContent = data.description;
+                        document.getElementById('modal-image').src = data.image;
+                        document.getElementById('spec-power').textContent = data.power;
+                        document.getElementById('spec-acceleration').textContent = data.acceleration;
+                        document.getElementById('spec-range').textContent = data.range;
+                        document.getElementById('spec-charging').textContent = data.charging;
+                        
+                        const featuresList = document.getElementById('modal-features');
+                        featuresList.innerHTML = '';
+                        
+                        data.features.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.textContent = feature;
+                            li.style.marginBottom = '0.5rem';
+                            featuresList.appendChild(li);
+                        });
+                        
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

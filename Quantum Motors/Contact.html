@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Quantum - Connect With The Future</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Google Maps Container Styles */
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 400px;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            border: 0;
+            width: 100%;
+            height: 100%;
+            filter: grayscale(0.3) invert(0.9) hue-rotate(180deg) contrast(1.2);
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(10, 10, 18, 0.8);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--neon-cyan);
+            max-width: 280px;
+        }
+        
+        .map-overlay h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+        }
+        
+        .map-overlay p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Site Map Specific Styles */
+        .sitemap-section {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+            color: var(--text-light);
+        }
+        
+        .sitemap-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .sitemap-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+        
+        .sitemap-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .sitemap-category {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .sitemap-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.1);
+        }
+        
+        .sitemap-category h3 {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .sitemap-category ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sitemap-category li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .sitemap-category a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+        
+        .sitemap-category a:before {
+            content: "→";
+            color: var(--neon-cyan);
+            margin-right: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, margin-right 0.3s ease;
+        }
+        
+        .sitemap-category a:hover {
+            color: var(--neon-cyan);
+            padding-left: 5px;
+        }
+        
+        .sitemap-category a:hover:before {
+            opacity: 1;
+            margin-right: 0.5rem;
+        }
+        
+        .sitemap-toggle {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .toggle-sitemap {
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-sitemap:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        /* Footer adjustments */
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--neon-cyan);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sitemap-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-overlay {
+                position: relative;
+                top: 0;
+                left: 0;
+                max-width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* CSS Variables for consistent styling */
+        :root {
+            --dark-bg: #0a0a12;
+            --text-light: #ffffff;
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bd00ff;
+            --card-bg: rgba(26, 26, 42, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div id="quantum-splash" class="quantum-splash">
+        <div class="quantum-loader"></div>
+        <div class="quantum-logo">QUANTUM</div>
+    </div>
+
+    <nav class="quantum-nav">
+        <div class="nav-container">
+            <div class="logo">QUANTUM</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="models.html">Models</a></li>
+                <li><a href="technology.html">Technology</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="quantum-main">
+        <section class="quantum-hero" style="background: linear-gradient(135deg, rgba(10, 10, 18, 0.9), rgba(26, 26, 42, 0.8)), url('https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80') center/cover;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Connect With Quantum</h1>
+                    <p class="hero-subtitle">Begin your journey into the future of mobility</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-showcase">
+            <div class="container">
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h2>Schedule a Quantum Experience</h2>
+                        <p>Our product specialists will arrange a personalized consultation and immersive demonstration at your nearest Quantum Immersion Center.</p>
+                        <form class="quantum-form" data-quantum-form>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="model">Model of Interest</label>
+                                <select id="model" name="model">
+                                    <option value="">Select a model</option>
+                                    <option value="e-tron">Quantum E-Tron</option>
+                                    <option value="s-series">Quantum S-Series</option>
+                                    <option value="future">Future Models</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Additional Information</label>
+                                <textarea id="message" name="message" rows="4"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="cta-button">Request Consultation</button>
+                        </form>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h2>Global Headquarters</h2>
+                        <p><strong>Quantum Motors International</strong><br>
+                        Innovation District, Silicon Valley<br>
+                        California, CA 94025<br>
+                        United States</p>
+                        
+                        <h3>Contact Information</h3>
+                        <p>Email: <a href="mailto:info@quantummotors.com" style="color: var(--neon-cyan);">info@quantummotors.com</a><br>
+                        Phone: +1 (888) 555-QUANTUM<br>
+                        Fax: +1 (888) 555-QUANTFAX</p>
+                        
+                        <h3>Immersion Centers</h3>
+                        <ul>
+                            <li>New York City</li>
+                            <li>London</li>
+                            <li>Tokyo</li>
+                            <li>Dubai</li>
+                            <li>Singapore</li>
+                            <li>Sydney</li>
+                        </ul>
+                        
+                        <!-- Google Maps Integration -->
+                        <div class="map-container">
+                            <div class="map-overlay">
+                                <h3>Quantum Headquarters</h3>
+                                <p>Innovation District</p>
+                                <p>Silicon Valley, CA</p>
+                            </div>
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101816.16035991947!2d-122.08624919999999!3d37.3893904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb07b9dba1c39%3A0xe1ff55235f576cf!2sSilicon%20Valley%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1719397992458!5m2!1sen!2s" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        
+                        <h3>Follow Our Journey</h3>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <a href="#" style="color: var(--neon-cyan); text-decoration: none;">Twitter</a>
+                            <a href="#" style="color: var(--neon-cyan); text-decoration: none;">Instagram</a>
+                            <a href="#" style="color: var(--neon-cyan); text-decoration: none;">LinkedIn</a>
+                            <a href="#" style="color: var(--neon-cyan); text-decoration: none;">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Site Map Section -->
+        <section class="sitemap-section">
+            <div class="container">
+                <div class="sitemap-header">
+                    <h2>Quantum Website Site Map</h2>
+                    <p>Navigate our digital universe with ease. Explore all that Quantum has to offer.</p>
+                </div>
+                
+                <div class="sitemap-grid">
+                    <div class="sitemap-category">
+                        <h3>Vehicle Models</h3>
+                        <ul>
+                            <li><a href="models.html#e-tron">Quantum E-Tron</a></li>
+                            <li><a href="models.html#s-series">Quantum S-Series</a></li>
+                            <li><a href="models.html#future">Future Concepts</a></li>
+                            <li><a href="models.html#compare">Compare Models</a></li>
+                            <li><a href="models.html#customize">Customize Your Quantum</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-category">
+                        <h3>Technology</h3>
+                        <ul>
+                            <li><a href="technology.html#battery">Quantum Battery System</a></li>
+                            <li><a href="technology.html#autonomy">Autonomous Driving</a></li>
+                            <li><a href="technology.html#performance">Performance Engineering</a></li>
+                            <li><a href="technology.html#sustainability">Sustainability</a></li>
+                            <li><a href="technology.html#innovation">Innovation Timeline</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-category">
+                        <h3>Experience Quantum</h3>
+                        <ul>
+                            <li><a href="experience.html#test-drive">Test Drive</a></li>
+                            <li><a href="experience.html#immersion">Immersion Centers</a></li>
+                            <li><a href="experience.html#events">Events</a></li>
+                            <li><a href="experience.html#ownership">Ownership Experience</a></li>
+                            <li><a href="experience.html#stories">Customer Stories</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-category">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="about.html">About Quantum</a></li>
+                            <li><a href="leadership.html">Leadership</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="press.html">Press Room</a></li>
+                            <li><a href="investors.html">Investor Relations</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-category">
+                        <h3>Support & Service</h3>
+                        <ul>
+                            <li><a href="support.html">Customer Support</a></li>
+                            <li><a href="charging.html">Charging Network</a></li>
+                            <li><a href="service.html">Service Centers</a></li>
+                            <li><a href="warranty.html">Warranty</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-category">
+                        <h3>Connect With Us</h3>
+                        <ul>
+                            <li><a href="contact.html">Contact Form</a></li>
+                            <li><a href="newsletter.html">Newsletter</a></li>
+                            <li><a href="social.html">Social Media</a></li>
+                            <li><a href="feedback.html">Feedback</a></li>
+                            <li><a href="locator.html">Find a Dealer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="quantum-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quantum Motors</h3>
+                    <p>Pioneering the future of mobility with cutting-edge technology and sustainable innovation.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="models.html">Models</a></li>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="experience.html">Experience</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="warranty.html">Warranty</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>&copy; 2025 Quantum Motors. Pioneering the future of mobility.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to handle the splash screen
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('quantum-splash').style.display = 'none';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
